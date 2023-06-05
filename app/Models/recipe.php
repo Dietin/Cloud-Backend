@@ -20,4 +20,8 @@ class recipe extends Model
         'category',
         'image',
     ];
+
+    function category(){
+        return $this->belongsTo(category::class, 'category', 'category_id');
+    }
 }
