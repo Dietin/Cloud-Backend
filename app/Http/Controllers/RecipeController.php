@@ -45,17 +45,17 @@ class RecipeController extends Controller
         ], 400);
     }
     public function search($name){
-        $recipe = recipe::where('name', $name)->first();
+        $recipes = recipe::where('name', 'like', '%' . $name . '%')->get();
         
-        if (!is_null($recipe)) {
+        if ($recipes->isNotEmpty()) {
             return response([
-                'message' => 'Retrieve Recipe Success',
-                'data' => $recipe
+                'message' => 'Retrieve Recipes Success',
+                'data' => $recipes
             ], 200);
         }
         
         return response([
-            'message' => 'Recipe Not Found',
+            'message' => 'Recipes Not Found',
             'data' => null
         ], 404);
     }
