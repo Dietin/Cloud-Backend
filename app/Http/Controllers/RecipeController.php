@@ -44,5 +44,20 @@ class RecipeController extends Controller
             'data' => null
         ], 400);
     }
+    public function search($name){
+        $recipe = recipe::where('name', $name)->first();
+        
+        if (!is_null($recipe)) {
+            return response([
+                'message' => 'Retrieve Recipe Success',
+                'data' => $recipe
+            ], 200);
+        }
+        
+        return response([
+            'message' => 'Recipe Not Found',
+            'data' => null
+        ], 404);
+    }
     
 }
