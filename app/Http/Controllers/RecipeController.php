@@ -45,7 +45,7 @@ class RecipeController extends Controller
         ], 400);
     }
     public function search($name){
-        $recipes = recipe::where('name', 'like', '%' . $name . '%')->get();
+        $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category')->get();
         
         if ($recipes->isNotEmpty()) {
             return response([
