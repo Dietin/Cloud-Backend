@@ -44,6 +44,7 @@ class RecipeController extends Controller
             'data' => null
         ], 400);
     }
+
     public function search($name){
         $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category')->get();
         
@@ -56,6 +57,22 @@ class RecipeController extends Controller
         
         return response([
             'message' => 'Recipes Not Found',
+            'data' => null
+        ], 404);
+    }
+
+    public function getByCategory($category){
+        $recipe = recipe::where('category', $category)->with('category')->get();
+        
+        if (!is_null($recipe)) {
+            return response([
+                'message' => 'Retrieve Recipe Success',
+                'data' => $recipe
+            ], 200);
+        }
+        
+        return response([
+            'message' => 'Recipe Not Found',
             'data' => null
         ], 404);
     }
