@@ -26,5 +26,6 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
     Route::get('/recipe/search/{name}', 'App\Http\Controllers\RecipeController@search');
     Route::get('/recipe/getByCategory/{category}', 'App\Http\Controllers\RecipeController@getByCategory');
     Route::get('category', 'App\Http\Controllers\CategoryController@index');
+    Route::post('foodHistory', 'App\Http\Controllers\foodHistoryController@store');
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
 });
