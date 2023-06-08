@@ -22,10 +22,22 @@ Route::post('register', 'App\Http\Controllers\API\AuthController@register');
 Route::post('login', 'App\Http\Controllers\API\AuthController@login');
 
 Route::group(['middleware' => 'auth:api','verified'], function(){
+    //recipe
     Route::get('recipe', 'App\Http\Controllers\RecipeController@index');
     Route::get('/recipe/search/{name}', 'App\Http\Controllers\RecipeController@search');
-    Route::get('/recipe/getByCategory/{category}', 'App\Http\Controllers\RecipeController@getByCategory');
+
+    //category
     Route::get('category', 'App\Http\Controllers\CategoryController@index');
+    Route::get('/recipe/getByCategory/{category}', 'App\Http\Controllers\RecipeController@getByCategory');
+
+    //user
+    Route::put('/dataUser/{id}', 'App\Http\Controllers\dataUserController@update');
+    Route::get('dataUser', 'App\Http\Controllers\dataUserController@index');
+
+    //foodHistory
     Route::post('foodHistory', 'App\Http\Controllers\foodHistoryController@store');
+    Route::get('foodHistory/{date}/{user_id}', 'App\Http\Controllers\foodHistoryController@getByDate');
+    Route::get('/foodHistoryGroup/{date}/{user_id}', 'App\Http\Controllers\foodHistoryController@getCaloriesByDateAndTime');
+
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
 });

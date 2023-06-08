@@ -54,4 +54,44 @@ class foodHistoryController extends Controller
             'data' => null
         ], 400);
     }
+
+    //mengambil date yang spesifik dan berdasarkan user_id yang sedang login
+    public function getByDate(Request $request, $date, $user_id){
+        $foodHistory = foodHistory::where('user_id', $user_id)->where('date', $date)->get();
+    
+        if ($foodHistory->isEmpty()) {
+            return response([
+                'message' => 'No food history found on the specific user and date',
+                'data' => null
+            ], 404);
+        }
+        
+        return response([
+            'message' => 'Retrieve specific food history success',
+            'data' => $foodHistory
+        ], 200);
+    }
+
+    //mengambil calories berdasarkan date and time dan berdasarkan user_id yang sedang login
+    public function getCaloriesByDateAndTime($date, $user_id){
+        $caloriesByDateAndTime = DB::table('foodHistory')
+                                ->select('food_time', DB::raw('SUM(calories) as total_calories'))
+                                ->where('user_id', $user_id)
+                                ->where('date', $date)
+                                ->groupBy('food_time')
+                                ->get();
+
+        if ($caloriesByDateAndTime->isEmpty()) {
+            return response([
+                'message' => 'No food history found on the specific user and date',
+                'data' => null
+            ], 404);
+        }
+
+        return response([
+            'message' => 'Retrieve calories grouped by date and food time success',
+            'data' => $caloriesByDateAndTime
+        ], 200);
+    }
+
 }

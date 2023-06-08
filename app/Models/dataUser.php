@@ -21,7 +21,8 @@ class dataUser extends Model
         'user_id',
 
     ];
-    function User(){
-        return $this->belongsTo(User::class, 'users', 'id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
