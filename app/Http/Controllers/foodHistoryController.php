@@ -27,8 +27,31 @@ class foodHistoryController extends Controller
 
         $foodHistory = foodHistory::create($storeData);
         return response([
-            'message' => 'Add History Success',
+            'message' => 'Add Food History Success',
             'data' => $foodHistory
         ], 200);
+    }
+
+    public function delete($id){
+        $foodHistory = foodHistory::find($id);
+
+        if(is_null($foodHistory)){
+            return response([
+                'message' => 'Food History Not Found',
+                'data' => null
+            ], 404);
+        }
+
+        if($history->delete()){
+            return response([
+                'message' => 'Delete Food History Success',
+                'data' => $history
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Delete Food History Failed',
+            'data' => null
+        ], 400);
     }
 }
