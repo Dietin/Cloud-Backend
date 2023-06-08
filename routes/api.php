@@ -31,7 +31,8 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
     Route::get('/recipe/getByCategory/{category}', 'App\Http\Controllers\RecipeController@getByCategory');
 
     //user
-    Route::put('/dataUser/{id}', 'App\Http\Controllers\dataUserController@update');
+    Route::put('user/{id}', 'App\Http\Controllers\UserController@update');
+    Route::post('/dataUser/{id}', 'App\Http\Controllers\dataUserController@store');
     Route::get('dataUser', 'App\Http\Controllers\dataUserController@index');
 
     //foodHistory

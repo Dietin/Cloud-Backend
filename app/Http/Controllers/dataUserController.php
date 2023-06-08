@@ -25,27 +25,51 @@ class dataUserController extends Controller
         ], 400); 
     }
 
-    public function update(Request $request, $id){
-        $dataUser = dataUser::findOrFail($id);
-        
-        $updated = $user->dataUser()->update([
-            'age' => $request->input('age'),
-            'weight' => $request->input('weight'),
-            'height' => $request->input('height'),
-            'bmr' => $request->input('bmr'),
-            'activity_level' => $request->input('activity_level'),
-            'gender' => $request->input('gender'),
-            'idealCalories' => $request->input('idealCalories')
-        ]);
-        
-        if ($updated) {
+    public function store(Request $request, $user_id){
+        $user = User::find($user_id);
+
+        if (!$user) {
             return response([
-                'message' => 'Update Data User Success',
-                'data' => $updated
+                'status' => 'error',
+                'message' => 'User not found',
+                'data' => null
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'age' => 'required',
+            'weight' => 'required',
+            'height' => 'required',
+            'bmr' => 'required',
+            'activity_level' => 'required',
+            'gender' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response([
+                'status' => 'error',
+                'message' => 'Validation error',
+                'data' => $validator->errors()
+            ], 400);
+        }
+
+        $dataUser = new dataUser();
+        $dataUser->age = $request->input('age');
+        $dataUser->weight = $request->input('weight');
+        $dataUser->height = $request->input('height');
+        $dataUser->bmr = $request->input('bmr');
+        $dataUser->activity_level = $request->input('activity_level');
+        $dataUser->gender = $request->input('gender');
+        $dataUser->user_id = $user->id;
+
+        if ($dataUser->save()) {
+            return response([
+                'message' => 'Add dataUser Success',
+                'data' => $dataUser
             ], 200);
         } else {
             return response([
-                'message' => 'Update Data User Failed',
+                'message' => 'Add dataUser failed',
                 'data' => null
             ], 400);
         }
