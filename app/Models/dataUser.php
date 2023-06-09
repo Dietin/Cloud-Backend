@@ -9,6 +9,7 @@ class dataUser extends Model
 {
     use HasFactory;
     protected $table = 'dataUser';
+    protected $primaryKey = 'dataUser_id';
     protected $fillable = [
         'dataUser_id',
         'age',

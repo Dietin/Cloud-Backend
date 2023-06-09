@@ -41,10 +41,14 @@ class dataUserController extends Controller
             ], 400);
         }
 
-        $dataUser = new dataUser();
+        $dataUser = dataUser::where('user_id', $user)->first();
+        if($dataUser==null){
+            $dataUser = new dataUser();
+        }
         $dataUser->age = $request->input('age');
         $dataUser->weight = $request->input('weight');
         $dataUser->height = $request->input('height');
+        // $dataUser->bmr = $dataUser->height + $dataUser->weight;
         $dataUser->bmr = $request->input('bmr');
         $dataUser->activity_level = $request->input('activity_level');
         $dataUser->gender = $request->input('gender');
