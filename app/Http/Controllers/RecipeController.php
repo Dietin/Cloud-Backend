@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\recipe;
 use App\Models\category;
+use App\Models\recipe_steps;
+use App\Models\recipe_ingredients;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,7 +29,7 @@ class RecipeController extends Controller
         $page = $request->page;
         $size = $request->size;
 
-        $recipe = recipe::skip(($page-1)*$size)->take($size)->with('category')->get();
+        $recipe = recipe::skip(($page-1)*$size)->take($size)->with('category', 'recipe_steps', 'recipe_ingredients')->get();
         // $recipe = category::all();
         // $db = DB::table('recipe')->get();
         // $recipe = recipe::where('name','=','Sauteed Bananas with Cardamom Praline Sauce')->get();
