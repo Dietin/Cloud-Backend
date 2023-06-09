@@ -28,14 +28,6 @@ class UserController extends Controller
     }
     public function update(Request $request){
         $id = $request->user()->id;
-        $user = User::find($id);
-
-        if(is_null($user)){
-            return response([
-                'message' => 'User Not Found',
-                'data' => null
-            ], 404);
-        }
 
         $updateData = $request->all();
         $updateData['id'] = $id;

@@ -84,13 +84,6 @@ class foodHistoryController extends Controller
                                 ->groupBy('food_time')
                                 ->get();
 
-        if ($caloriesByDateAndTime->isEmpty()) {
-            return response([
-                'message' => 'No food history found on the specific user and date',
-                'data' => null
-            ], 404);
-        }
-
         return response([
             'message' => 'Retrieve calories grouped by date and food time success',
             'data' => $caloriesByDateAndTime

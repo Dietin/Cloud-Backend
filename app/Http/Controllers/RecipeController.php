@@ -34,15 +34,10 @@ class RecipeController extends Controller
         
         if(count($recipe) > 0){
             return response([
-                'message' => 'Retrieve All Success',
+                'message' => 'Retrieve Recipe Success',
                 'data' => $recipe
             ], 200);
         }
-
-        return response([
-            'message' => 'Empty',
-            'data' => null
-        ], 400);
     }
 
     public function search($name){
@@ -54,11 +49,6 @@ class RecipeController extends Controller
                 'data' => $recipes
             ], 200);
         }
-        
-        return response([
-            'message' => 'Recipes Not Found',
-            'data' => null
-        ], 404);
     }
 
     public function getByCategory($category){

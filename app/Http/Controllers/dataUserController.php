@@ -15,26 +15,14 @@ class dataUserController extends Controller
 
         if(count($dataUser) > 0){
             return response([
+                'message' => 'Retrieve all User Success',
                 'data' => $dataUser
             ], 200);
         }
-
-        return response([
-            'message' => 'Empty',
-            'data' => null
-        ], 400); 
     }
 
     public function store(Request $request){
         $user = $request->user()->id;
-
-        if (!$user) {
-            return response([
-                'status' => 'error',
-                'message' => 'User not found',
-                'data' => null
-            ], 404);
-        }
 
         $validator = Validator::make($request->all(), [
             'age' => 'required',
