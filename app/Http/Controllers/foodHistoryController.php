@@ -11,6 +11,7 @@ class foodHistoryController extends Controller
 {
     public function store(Request $request){
         $storeData = $request->all();
+        $storeData['user_id'] = $request->user()->id;
         $validate = Validator::make($storeData, [
             'user_id' => 'required',
             'recipe_id' => 'required',
@@ -56,7 +57,8 @@ class foodHistoryController extends Controller
     }
 
     //mengambil date yang spesifik dan berdasarkan user_id yang sedang login
-    public function getByDate(Request $request, $date, $user_id){
+    public function getByDate(Request $request, $date){
+        $user_id = $request->user()->id;
         $foodHistory = foodHistory::where('user_id', $user_id)->where('date', $date)->get();
     
         if ($foodHistory->isEmpty()) {
@@ -73,7 +75,8 @@ class foodHistoryController extends Controller
     }
 
     //mengambil calories berdasarkan date and time dan berdasarkan user_id yang sedang login
-    public function getCaloriesByDateAndTime($date, $user_id){
+    public function getCaloriesByDateAndTime(Request $request, $date){
+        $user_id = $request->user()->id;
         $caloriesByDateAndTime = DB::table('foodHistory')
                                 ->select('food_time', DB::raw('SUM(calories) as total_calories'))
                                 ->where('user_id', $user_id)

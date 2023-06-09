@@ -25,8 +25,8 @@ class dataUserController extends Controller
         ], 400); 
     }
 
-    public function store(Request $request, $user_id){
-        $user = User::find($user_id);
+    public function store(Request $request){
+        $user = $request->user()->id;
 
         if (!$user) {
             return response([
@@ -60,7 +60,7 @@ class dataUserController extends Controller
         $dataUser->bmr = $request->input('bmr');
         $dataUser->activity_level = $request->input('activity_level');
         $dataUser->gender = $request->input('gender');
-        $dataUser->user_id = $user->id;
+        $dataUser->user_id = $user;
 
         if ($dataUser->save()) {
             return response([

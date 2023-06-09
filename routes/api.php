@@ -31,14 +31,14 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
     Route::get('/recipe/getByCategory/{category}', 'App\Http\Controllers\RecipeController@getByCategory');
 
     //user
-    Route::put('user/{id}', 'App\Http\Controllers\UserController@update');
-    Route::post('/dataUser/{id}', 'App\Http\Controllers\dataUserController@store');
+    Route::put('user', 'App\Http\Controllers\UserController@update');
+    Route::post('/dataUser', 'App\Http\Controllers\dataUserController@store');
     Route::get('dataUser', 'App\Http\Controllers\dataUserController@index');
 
     //foodHistory
     Route::post('foodHistory', 'App\Http\Controllers\foodHistoryController@store');
-    Route::get('foodHistory/{date}/{user_id}', 'App\Http\Controllers\foodHistoryController@getByDate');
-    Route::get('/foodHistoryGroup/{date}/{user_id}', 'App\Http\Controllers\foodHistoryController@getCaloriesByDateAndTime');
+    Route::get('foodHistory/{date}', 'App\Http\Controllers\foodHistoryController@getByDate');
+    Route::get('/foodHistoryGroup/{date}', 'App\Http\Controllers\foodHistoryController@getCaloriesByDateAndTime');
 
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
 });
