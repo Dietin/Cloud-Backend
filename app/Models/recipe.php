@@ -30,7 +30,7 @@ class recipe extends Model
         return $this->hasMany(recipe_steps::class, 'recipe_id');
     }
 
-    function recipe_ingredients(){
+    public function recipe_ingredients(){
         return $this->hasMany(recipe_ingredients::class, 'recipe_id');
     }
 }

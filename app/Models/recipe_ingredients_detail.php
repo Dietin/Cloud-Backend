@@ -15,7 +15,12 @@ class recipe_ingredients_detail extends Model
         'name',
         'nutrition_json',
     ];
-    function recipe_ingredients_weights(){
+    
+    protected $hidden = [
+        'nutrition_json'
+    ];
+    public function recipe_ingredients_weights()
+    {
         return $this->hasMany(recipe_ingredients_weights::class, 'recipe_ingredient_id');
     }
 }

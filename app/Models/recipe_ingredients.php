@@ -13,13 +13,20 @@ class recipe_ingredients extends Model
     protected $fillable = [
         'id',
         'recipe_id',
+        'ingredients_detail_id',
         'amount',
     ];
 
-    function recipe(){
+    public function recipe(){
         return $this->belongsTo(recipe::class, 'recipe_id');
     }
-    function recipe_ingredients_weights(){
+    
+    public function recipe_ingredients_detail(){
+        return $this->belongsTo(recipe_ingredients_detail::class, 'ingredients_detail_id');
+    }
+    
+    public function recipe_ingredients_weights()
+    {
         return $this->hasMany(recipe_ingredients_weights::class, 'recipe_ingredient_id');
     }
 }

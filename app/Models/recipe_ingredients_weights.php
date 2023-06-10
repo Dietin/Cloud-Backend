@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class recipe_ingredients_weights extends Model
 {
     use HasFactory;
-    protected $table = 'recipe_ingredients';
+    protected $table = 'recipe_ingredients_weights';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
@@ -18,7 +18,7 @@ class recipe_ingredients_weights extends Model
         'grams'
     ];
 
-    function recipe_ingredients_detail(){
+    public function recipe_ingredients_detail(){
         return $this->belongsTo(recipe_ingredients_detail::class, 'recipe_ingredient_id');
     }
 }

@@ -67,7 +67,7 @@ class dataUserController extends Controller
             $dataUser->activity_level = 1;
         }
 
-        if ($dataUser->gender == 1) {
+        if ($dataUser->gender == 0) {
             $dataUser->bmr = 655.1 + (9.563 * $dataUser->weight) + (1.850 * $dataUser->height) - (4.676 * $dataUser->age);
         } else {
             $dataUser->bmr = 66.47 + (13.75 * $dataUser->weight) + (5.003 * $dataUser->height) - (6.755 * $dataUser->age);
