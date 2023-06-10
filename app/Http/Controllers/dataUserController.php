@@ -28,8 +28,7 @@ class dataUserController extends Controller
             'age' => 'required',
             'weight' => 'required',
             'height' => 'required',
-            'bmr' => 'required',
-            'activity_level' => 'required',
+            'activity_level' => 'required|integer|between:1,5',
             'gender' => 'required'
         ]);
 
@@ -48,11 +47,31 @@ class dataUserController extends Controller
         $dataUser->age = $request->input('age');
         $dataUser->weight = $request->input('weight');
         $dataUser->height = $request->input('height');
-        // $dataUser->bmr = $dataUser->height + $dataUser->weight;
-        $dataUser->bmr = $request->input('bmr');
-        $dataUser->activity_level = $request->input('activity_level');
+        // $dataUser->bmr = $request->input('bmr');
         $dataUser->gender = $request->input('gender');
         $dataUser->user_id = $user;
+
+        $activityLevel = $request->input('activity_level');
+        if ($activityLevel == 1) {
+            $dataUser->activity_level = 1.2;
+        } elseif ($activityLevel == 2) {
+            $dataUser->activity_level = 1.375;
+        } elseif ($activityLevel == 3) {
+            $dataUser->activity_level = 1.55;
+        } elseif ($activityLevel == 4) {
+            $dataUser->activity_level = 1.725;
+        } elseif ($activityLevel == 5) {
+            $dataUser->activity_level = 1.9;
+        } else {
+            // Default value if activity_level is not within the specified range
+            $dataUser->activity_level = 1;
+        }
+
+        if ($dataUser->gender == 1) {
+            $dataUser->bmr = 655.1 + (9.563 * $dataUser->weight) + (1.850 * $dataUser->height) - (4.676 * $dataUser->age);
+        } else {
+            $dataUser->bmr = 66.47 + (13.75 * $dataUser->weight) + (5.003 * $dataUser->height) - (6.755 * $dataUser->age);
+        }
 
         if ($dataUser->save()) {
             return response([

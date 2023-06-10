@@ -7,6 +7,8 @@ use App\Models\recipe;
 use App\Models\category;
 use App\Models\recipe_steps;
 use App\Models\recipe_ingredients;
+use App\Models\recipe_ingredients_detail;
+use App\Models\recipe_ingredients_weights;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 

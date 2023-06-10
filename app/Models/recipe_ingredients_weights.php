@@ -18,7 +18,7 @@ class recipe_ingredients_weights extends Model
         'grams'
     ];
 
-    function recipe_ingredients(){
-        return $this->belongsTo(recipe_ingredients::class, 'recipe_ingredient_id');
+    function recipe_ingredients_detail(){
+        return $this->belongsTo(recipe_ingredients_detail::class, 'recipe_ingredient_id');
     }
 }
