@@ -49,6 +49,7 @@ class dataUserController extends Controller
         $dataUser->height = $request->input('height');
         // $dataUser->bmr = $request->input('bmr');
         $dataUser->gender = $request->input('gender');
+        $dataUser->bmi = $request->input('weight')/(($request->input('height')/100)*($request->input('height')/100));
         $dataUser->user_id = $user;
 
         $activityLevel = $request->input('activity_level');
