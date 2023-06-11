@@ -48,4 +48,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(DataUser::class, 'user_id');
     }
+
+    public function searchHistory()
+    {
+        return $this->hasMany(searchHistory::class, 'user_id');
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(favorite::class, 'user_id');
+    }
 }

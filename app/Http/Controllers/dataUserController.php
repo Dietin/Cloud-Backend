@@ -29,7 +29,9 @@ class dataUserController extends Controller
             'weight' => 'required',
             'height' => 'required',
             'activity_level' => 'required|integer|between:1,5',
-            'gender' => 'required'
+            'gender' => 'required',
+            'current_weight' => 'required',
+            'diet_objective' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -51,6 +53,8 @@ class dataUserController extends Controller
         $dataUser->gender = $request->input('gender');
         $dataUser->bmi = $request->input('weight')/(($request->input('height')/100)*($request->input('height')/100));
         $dataUser->user_id = $user;
+        $dataUser->diet_objective = $request->input('diet_objective');
+        $dataUser->current_weight = $request->input('current_weight');
 
         $activityLevel = $request->input('activity_level');
         if ($activityLevel == 1) {

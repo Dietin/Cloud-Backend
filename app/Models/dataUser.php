@@ -20,6 +20,8 @@ class dataUser extends Model
         'gender',
         'idealCalories',
         'user_id',
+        'current_weight',
+        'diet_objective'
 
     ];
     public function user()

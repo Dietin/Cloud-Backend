@@ -33,9 +33,9 @@ class foodHistoryController extends Controller
         ], 200);
     }
 
-    public function delete($id){
+    public function destroy($id){
         $foodHistory = foodHistory::find($id);
-
+        
         if(is_null($foodHistory)){
             return response([
                 'message' => 'Food History Not Found',
@@ -43,10 +43,10 @@ class foodHistoryController extends Controller
             ], 404);
         }
 
-        if($history->delete()){
+        if($foodHistory->delete()){
             return response([
                 'message' => 'Delete Food History Success',
-                'data' => $history
+                'data' => $foodHistory
             ], 200);
         }
 
@@ -54,6 +54,19 @@ class foodHistoryController extends Controller
             'message' => 'Delete Food History Failed',
             'data' => null
         ], 400);
+    }
+
+    public function destroyAll(Request $request){
+        $id = $request->user()->id;
+
+        $foodHistory = foodHistory::where('user_id', $id)->delete();
+
+        if ($foodHistory) {
+            return response([
+                'message' => 'Delete all Food History Success',
+                'data' => $foodHistory
+            ], 200);
+        }
     }
 
     //mengambil date yang spesifik dan berdasarkan user_id yang sedang login

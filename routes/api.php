@@ -24,7 +24,7 @@ Route::post('login', 'App\Http\Controllers\API\AuthController@login');
 Route::group(['middleware' => 'auth:api','verified'], function(){
     //recipe
     Route::get('recipe', 'App\Http\Controllers\RecipeController@index');
-    Route::get('/recipe/search/{name}', 'App\Http\Controllers\RecipeController@search');
+    Route::get('/recipe/search', 'App\Http\Controllers\RecipeController@search');
 
     //category
     Route::get('category', 'App\Http\Controllers\CategoryController@index');
@@ -39,6 +39,18 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
     Route::post('foodHistory', 'App\Http\Controllers\foodHistoryController@store');
     Route::get('foodHistory/{date}', 'App\Http\Controllers\foodHistoryController@getByDate');
     Route::get('/foodHistoryGroup/{date}', 'App\Http\Controllers\foodHistoryController@getCaloriesByDateAndTime');
+    Route::delete('foodHistory/{id}', 'App\Http\Controllers\foodHistoryController@destroy');
+    Route::delete('deleteAllFoodHistory', 'App\Http\Controllers\foodHistoryController@destroyAll');
+
+    //searchHistory
+    Route::get('searchHistory', 'App\Http\Controllers\searchHistoryController@index');
+    Route::post('searchHistory', 'App\Http\Controllers\searchHistoryController@store');
+
+    //favorite
+    Route::get('favorite', 'App\Http\Controllers\favoriteController@index');
+    Route::post('favorite', 'App\Http\Controllers\favoriteController@store');
+    Route::delete('favorite/{id}', 'App\Http\Controllers\favoriteController@destroy');
+    Route::delete('deleteAllFavorite', 'App\Http\Controllers\favoriteController@destroyAll');
 
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
 });

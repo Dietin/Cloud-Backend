@@ -44,9 +44,9 @@ class RecipeController extends Controller
         }
     }
 
-    public function search($name){
-        $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category')->get();
-        
+    public function search(Request $request){
+        $name = $request->q;
+        $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->take(20)->get();
         if ($recipes->isNotEmpty()) {
             return response([
                 'message' => 'Retrieve Recipes Success',
