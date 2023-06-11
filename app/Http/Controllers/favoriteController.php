@@ -13,7 +13,7 @@ class favoriteController extends Controller
 {
     public function index(Request $request){
         $id = $request->user()->id;
-        $favorite = favorite::with('user', 'recipe',)->get();
+        $favorite = favorite::where('user_id', $id)->with('user', 'recipe',)->get();
 
         if(count($favorite) > 0){
             return response([

@@ -11,7 +11,7 @@ class dataUserController extends Controller
 {
     
     public function index(){
-        $dataUser = dataUser::with('User')->get();
+        $dataUser = dataUser::where('user_id', $id)->with('User')->get();
 
         if(count($dataUser) > 0){
             return response([

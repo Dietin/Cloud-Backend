@@ -11,7 +11,8 @@ use App\Models\recipe;
 class searchHistoryController extends Controller
 {
     public function index(){
-        $searchHistory = searchHistory::latest()->take(20)->with('user', 'recipe',)->get();
+        $id = $request->user()->id;
+        $searchHistory = searchHistory::where('user_id', $id)->latest()->take(20)->with('user', 'recipe',)->get();
 
         if(count($searchHistory) > 0){
             return response([

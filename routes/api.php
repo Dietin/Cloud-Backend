@@ -18,6 +18,8 @@ use App\Http\Controllers\API\AuthController;
 */
 Auth::routes(['verify' => true]);
 
+
+//21 dietin model routes
 Route::post('register', 'App\Http\Controllers\API\AuthController@register');
 Route::post('login', 'App\Http\Controllers\API\AuthController@login');
 
