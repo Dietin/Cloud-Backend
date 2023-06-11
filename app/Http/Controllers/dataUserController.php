@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class dataUserController extends Controller
 {
     
-    public function index(){
+    public function index(Request $request){
         $id = $request->user()->id;
         $dataUser = dataUser::where('user_id', $id)->with('User')->get();
 
