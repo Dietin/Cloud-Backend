@@ -44,12 +44,10 @@ class searchHistoryController extends Controller
 
         $searchHistory = searchHistory::where('user_id', $id)->delete();
 
-        if ($foodHistory) {
             return response([
                 'message' => 'Delete all Search History Success',
                 'data' => $searchHistory
             ], 200);
-        }
     }
 
 }
