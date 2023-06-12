@@ -14,12 +14,10 @@ class dataUserController extends Controller
         $id = $request->user()->id;
         $dataUser = dataUser::where('user_id', $id)->with('User')->get();
 
-        if(count($dataUser) > 0){
             return response([
                 'message' => 'Retrieve all User Success',
                 'data' => $dataUser
             ], 200);
-        }
     }
 
     public function store(Request $request){

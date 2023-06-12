@@ -47,12 +47,18 @@ class RecipeController extends Controller
     public function search(Request $request){
         $name = $request->q;
         $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->take(20)->get();
-        if ($recipes->isNotEmpty()) {
             return response([
                 'message' => 'Retrieve Recipes Success',
                 'data' => $recipes
             ], 200);
-        }
+    }
+
+    public function getByid($id){
+        $recipe = recipe::where('id', $id)->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->first();
+            return response([
+                'message' => 'Retrieve Recipe Success',
+                'data' => $recipe
+            ], 200);
     }
 
     public function getByCategory($category){
