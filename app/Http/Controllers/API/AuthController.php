@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\dataUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -78,12 +79,14 @@ public function login (Request $request){
 
     if(Auth::guard('web')->attempt($loginData)){
         $user = Auth::user();
+        $dataUser = dataUser::where('user_id',$user->id)->first();
         $token = $user->createToken('Authentication Token')->accessToken;   //generate token
 
         return response([
             'message' => 'Authenticated',
             'data' => [
                 'user' => $user,
+                'data_user' => $dataUser,
                 'token_type' => 'Bearer',
                 'access_token' => $token,
             ]
