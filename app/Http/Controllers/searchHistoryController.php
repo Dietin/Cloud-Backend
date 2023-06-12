@@ -14,12 +14,10 @@ class searchHistoryController extends Controller
         $id = $request->user()->id;
         $searchHistory = searchHistory::where('user_id', $id)->latest()->take(20)->with('user', 'recipe',)->get();
 
-        if(count($searchHistory) > 0){
             return response([
                 'message' => 'Retrieve Search History Success',
                 'data' => $searchHistory
             ], 200);
-        }
     }
 
     public function store(Request $request){
