@@ -54,7 +54,7 @@ class RecipeController extends Controller
     }
 
     public function getByid($id){
-        $recipe = recipe::find($id)->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->get();
+        $recipe = recipe::where('id', $id)->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->get();
             return response([
                 'message' => 'Retrieve Recipe Success',
                 'data' => $recipe
