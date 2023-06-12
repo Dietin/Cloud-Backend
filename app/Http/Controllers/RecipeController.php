@@ -44,12 +44,12 @@ class RecipeController extends Controller
         }
     }
 
-    public function search(Request $request, $category){
+    public function search(Request $request){
         $name = $request->q;
         $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category');
         
         if ($request->category) {
-            $recipes = $recipes->where("id_category", $request->category);
+            $recipes = $recipes->where("category", $request->category);
         }$recipes = $recipes->take(20)->get();
 
             return response([
