@@ -31,7 +31,7 @@ class RecipeController extends Controller
         $page = $request->page;
         $size = $request->size;
 
-        $recipe = recipe::skip(($page-1)*$size)->take($size)->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->get();
+        $recipe = recipe::skip(($page-1)*$size)->take($size)->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->inRandomOrder()->get();
         // $recipe = category::all();
         // $db = DB::table('recipe')->get();
         // $recipe = recipe::where('name','=','Sauteed Bananas with Cardamom Praline Sauce')->get();
@@ -44,14 +44,14 @@ class RecipeController extends Controller
         }
     }
 
-    public function search(Request $request){
+    public function search(Request $request, $category){
         $name = $request->q;
         $recipes = recipe::where('name', 'like', '%' . $name . '%')->with('category');
         
         if ($request->category) {
             $recipes = $recipes->where("id_category", $request->category);
         }$recipes = $recipes->take(20)->get();
-        
+
             return response([
                 'message' => 'Retrieve Recipes Success',
                 'data' => $recipes
