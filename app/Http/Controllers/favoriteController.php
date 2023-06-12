@@ -7,20 +7,19 @@ use App\Models\favorite;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\recipe;
+use App\Models\category;
 
 
 class favoriteController extends Controller
 {
     public function index(Request $request){
         $id = $request->user()->id;
-        $favorite = favorite::where('user_id', $id)->with('user', 'recipe',)->get();
+        $favorite = favorite::where('user_id', $id)->with('recipe', 'category')->get();
 
-        if(count($favorite) > 0){
             return response([
                 'message' => 'Retrieve Favorite Success',
                 'data' => $favorite
             ], 200);
-        }
 
     }
 
