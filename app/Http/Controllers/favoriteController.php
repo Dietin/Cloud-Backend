@@ -14,7 +14,7 @@ class favoriteController extends Controller
 {
     public function index(Request $request){
         $id = $request->user()->id;
-        $favorite = favorite::where('user_id', $id)->with('recipe', 'category')->get();
+        $favorite = favorite::where('user_id', $id)->with('recipe.category')->get();
 
             return response([
                 'message' => 'Retrieve Favorite Success',
