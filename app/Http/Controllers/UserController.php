@@ -38,7 +38,8 @@ class UserController extends Controller
         
         if($validate->fails())
             return response(['message' => $validate->errors()], 400);
-
+            
+        $user = User::find($id);
         $user->name = $updateData['name'];
         $user->email = $updateData['email'];
 
