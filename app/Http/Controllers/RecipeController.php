@@ -31,7 +31,7 @@ class RecipeController extends Controller
         $page = $request->page;
         $size = $request->size;
 
-        $recipe = recipe::skip(($page-1)*$size)->take($size)->with('category', 'recipe_steps', 'recipe_ingredients.recipe_ingredients_detail.recipe_ingredients_weights')->inRandomOrder()->get();
+        $recipe = recipe::skip(($page-1)*$size)->take($size)->with('category')->inRandomOrder()->get();
         // $recipe = category::all();
         // $db = DB::table('recipe')->get();
         // $recipe = recipe::where('name','=','Sauteed Bananas with Cardamom Praline Sauce')->get();
