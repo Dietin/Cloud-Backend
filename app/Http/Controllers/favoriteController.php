@@ -79,11 +79,11 @@ class favoriteController extends Controller
         ], 400);
     }
 
-    function checkIsFavorit(Request $request){
+    function checkIsFavorit(Request $request, $recipe_id){
         $user_id = $request->user()->id;
         $favorite = favorite::where('user_id', $user_id)->where('recipe_id', $recipe_id)->first();
         if($favorite){
-            return true;
+            return $favorite;
         }else{
             return false;
         }

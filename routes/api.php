@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
 
     //favorite
     Route::get('favorite', 'App\Http\Controllers\favoriteController@index');
-    Route::get('favorite/checkFavorite', 'App\Http\Controllers\favoriteController@checkIsFavorit');
+    Route::get('checkFavorite/{id}', 'App\Http\Controllers\favoriteController@checkIsFavorit');
     Route::post('favorite', 'App\Http\Controllers\favoriteController@store');
     Route::delete('favorite/{id}', 'App\Http\Controllers\favoriteController@destroy');
     Route::delete('deleteAllFavorite', 'App\Http\Controllers\favoriteController@destroyAll');
