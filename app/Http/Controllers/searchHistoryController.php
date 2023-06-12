@@ -10,7 +10,7 @@ use App\Models\recipe;
 
 class searchHistoryController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $id = $request->user()->id;
         $searchHistory = searchHistory::where('user_id', $id)->latest()->take(20)->with('user', 'recipe',)->get();
 
