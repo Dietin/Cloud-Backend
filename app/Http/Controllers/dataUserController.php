@@ -12,7 +12,7 @@ class dataUserController extends Controller
     
     public function index(Request $request){
         $id = $request->user()->id;
-        $dataUser = dataUser::where('user_id', $id)->with('User')->get();
+        $dataUser = dataUser::where('user_id', $id)->with('User')->first();
 
             return response([
                 'message' => 'Retrieve all User Success',
