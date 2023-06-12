@@ -23,10 +23,10 @@ class searchHistoryController extends Controller
     public function store(Request $request){
         $storeData = $request->all();
         $storeData['user_id'] = $request->user()->id;
+        $storeData["searched_at"] = date("Y-m-d H:i:s");
         $validate = Validator::make($storeData, [
             'recipe_id' => 'required',
             'user_id' => 'required',
-            'searched_at' => 'required',
         ]);
 
         if($validate->fails())
