@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
     //searchHistory
     Route::get('searchHistory', 'App\Http\Controllers\searchHistoryController@index');
     Route::post('searchHistory', 'App\Http\Controllers\searchHistoryController@store');
+    Route::delete('deleteAllSearchHistory', 'App\Http\Controllers\searchHistoryController@destroyAll');
 
     //favorite
     Route::get('favorite', 'App\Http\Controllers\favoriteController@index');

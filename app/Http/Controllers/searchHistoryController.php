@@ -39,4 +39,17 @@ class searchHistoryController extends Controller
         ], 200);
     }
 
+    public function destroyAll(Request $request){
+        $id = $request->user()->id;
+
+        $searchHistory = searchHistory::where('user_id', $id)->delete();
+
+        if ($foodHistory) {
+            return response([
+                'message' => 'Delete all Search History Success',
+                'data' => $searchHistory
+            ], 200);
+        }
+    }
+
 }
