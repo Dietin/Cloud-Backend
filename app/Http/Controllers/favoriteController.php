@@ -83,9 +83,15 @@ class favoriteController extends Controller
         $user_id = $request->user()->id;
         $favorite = favorite::where('user_id', $user_id)->where('recipe_id', $recipe_id)->first();
         if($favorite){
-            return $favorite;
+            return response([
+                'message' => 'Check Favorite Success',
+                'data' => $favorite
+            ], 200);
         }else{
-            return false;
+            return response([
+                'message' => 'Check Favorite Failed',
+                'data' => null
+            ], 200);
         }
     }
 
