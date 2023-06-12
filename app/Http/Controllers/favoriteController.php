@@ -56,8 +56,8 @@ class favoriteController extends Controller
         }
     }
 
-    public function destroy($id){
-        $favorite = favorite::find($id);
+    public function destroy($recipe_id){
+        $favorite = favorite::find($recipe_id);
         
         if(is_null($favorite)){
             return response([
