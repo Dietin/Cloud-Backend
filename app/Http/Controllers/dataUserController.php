@@ -59,11 +59,11 @@ class dataUserController extends Controller
         if ($activityLevel == 1) {
             $dataUser->activity_level = 1.2;
         } elseif ($activityLevel == 2) {
-            $dataUser->activity_level = 1.375;
+            $dataUser->activity_level = 1.3;
         } elseif ($activityLevel == 3) {
-            $dataUser->activity_level = 1.55;
+            $dataUser->activity_level = 1.5;
         } elseif ($activityLevel == 4) {
-            $dataUser->activity_level = 1.725;
+            $dataUser->activity_level = 1.7;
         } elseif ($activityLevel == 5) {
             $dataUser->activity_level = 1.9;
         } else {
