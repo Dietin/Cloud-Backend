@@ -1,64 +1,1366 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# API Model-Diet!n-API Spec
 
-## About Laravel
+The documentation 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# API Reference
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Authentication and Authorization
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Register
+- Endpoint :
+    - /register
+- Method :
+    - POST
+- Body :
+```json 
+{
+    "name" : "string, no whistespace, alphanumeric, required",
+    "email" : "string, email, required",
+    "password" : "string, min:6, required",
+}
+```
+- Response :
+```json 
+{
+    "status": "success",
+    "message": "Register Berhasil!",
+    "data": {
+        "email": "testing@gmail.com",
+        "name": "testing",
+        "updated_at": "2023-06-12T15:47:40.000000Z",
+        "created_at": "2023-06-12T15:47:40.000000Z",
+        "id": 21
+    }
+}
+```
 
-## Learning Laravel
+### Login
+- Endpoint :
+    - /login
+- Method :
+    - POST
+- Body :
+```json 
+{
+ "email": "testing@gmail.com",
+ "password":"testing"
+}
+```
+- Response :
+```json 
+{
+    "message": "Authenticated",
+    "data": {
+        "user": {
+            "id": 21,
+            "name": "testing",
+            "email": "testing@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-06-12T15:47:40.000000Z",
+            "updated_at": "2023-06-12T15:47:40.000000Z"
+        },
+        "token_type": "Bearer",
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4MSIsImp0aSI6Ijk4ZmQ0MzNmYTU5NzY4MDNmNjQ0NTg5NGI5YTdiODg4ZGMyN2ZiOWViODA3NTJmNDU1ZjA5NDA2MTc2ZTRkYzE4MTNhMjBmMjljNTI5NmEyIiwiaWF0IjoxNjg2NTg0OTczLjY2NDUxOSwibmJmIjoxNjg2NTg0OTczLjY2NDUyMSwiZXhwIjoxNzE4MjA3MzczLjY1NDM1LCJzdWIiOiIyMSIsInNjb3BlcyI6W119.NKzwSiI_EMQ3axDPlDZreJ9Und4SVE4s3DDhxPM4L4qRjqt2U-vlhrUdQu18Bp5V6Jh9-6JbcX0UM4iInceo8MDS6kc4sVD9pa1eGbT1XEuXFH8_crBYZs8rMmjNVpVhUbE2TM3CF5NtxiMJ8tGq2qcKrwGNGE5qQqHhdIE20Hm7o1AQCmth0B0-qJIvRf-u-qhvCSD6blaPi_xdKa50AlBE77F2lgwONMSagcbRM2ZEzAzq78PLtZqpoaN2HdlpEgUxkJ-eV9TAfhJxFSVROd2dGXJsNcSGD4dSnMzL7hVErP4PVlKLM_m_BINK29r44ICKT7nh0XDEAEFXKDaUXeFB37HDSyrTlEy6IDs-Rszo3MgrrazIWsRRUqyiHTA3H6mnGZ1d-5RQpcVvWHgaeJojg2YpLt7Y50IJXUPtweyonDUsxxUl1yO_y0f5JUqbl4BCr9yjQQH2Wt_Fhs8glABlf7oz_xClie6MRea0Yi-BIo7v7FwYOM554eNsBOSLVoxwWoVoKclFVAZoO5nes67S38PFjYK-tWxBEm5O5a0fLi7HI0BshMkXFV_Ve3wvCXwLCUHqvCedU5x8JsVvq6Dj-Z47aOzhIcfG0DWLASyHvMxdN5ENC1yJQ-6Nn7WdKXslo2PJw8apRZyAq70Wvl7pENiepRPFFUsDMGeT_U0"
+    }
+}
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Logout
+- Endpoint :
+    - /logout
+- Method :
+    - POST
+- Response :
+```json 
+{
+    "message": "Logout Success",
+    "user": {
+        "id": 21,
+        "name": "testing",
+        "email": "testing@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2023-06-12T15:47:40.000000Z",
+        "updated_at": "2023-06-12T15:47:40.000000Z"
+    }
+}
+```
+### resep
+- Endpoint :
+    - /recipe
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve Recipe Success",
+    "data": [
+        {
+            "id": 4997,
+            "name": "Nancyelle's Thin and Crispy Low Carb Pizza",
+            "number_servings": 8,
+            "calories": 369.39,
+            "carbs": 5.21,
+            "fats": 27.68,
+            "proteins": 23.95,
+            "category": {
+                "category_id": 11,
+                "category_name": "Other",
+                "icon": "https://storage.googleapis.com/image-food/icons/icon-11.png",
+                "colour_array": "251,95,165"
+            },
+            "image": "https://storage.googleapis.com/image-food/images/209787_erin_m_2fdad597-4987-4319-b00d-ff28fb784486.png"
+        }
+    ]
+}
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### s resep
+- Endpoint :
+    - /recipe/search
+- Method :
+    - POST
+- Params :
+```json 
+{
+    "q" : "peanut",
+    "category" : "3",
+}
+```
+- Response :
+```json 
+{
+    "message": "Retrieve Recipes Success",
+    "data": [
+        {
+            "id": 332,
+            "name": "Almond Peanut Butter Chip Muffins",
+            "number_servings": 12,
+            "calories": 137.8,
+            "carbs": 11.26,
+            "fats": 8.77,
+            "proteins": 4.12,
+            "category": {
+                "category_id": 3,
+                "category_name": "Desserts",
+                "icon": "https://storage.googleapis.com/image-food/icons/icon-3.png",
+                "colour_array": "190,227,247"
+            },
+            "image": "https://storage.googleapis.com/image-food/images/281092_Trihardist_3301ce46-a122-4093-9d12-7d5e2759e741.png"
+        },
+    ]
+}
+```
 
-## Laravel Sponsors
+### Logout
+- Endpoint :
+    - /logout
+- Method :
+    - POST
+- Response :
+```json 
+{
+    "message": "Logout Success",
+    "user": {
+        "id": 21,
+        "name": "testing",
+        "email": "testing@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2023-06-12T15:47:40.000000Z",
+        "updated_at": "2023-06-12T15:47:40.000000Z"
+    }
+}
+```# API Reference
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Authentication and Authorization
 
-### Premium Partners
+### Register
+- Endpoint :
+    - /register
+- Method :
+    - POST
+- Body :
+```json 
+{
+    "name" : "string, no whistespace, alphanumeric, required",
+    "email" : "string, email, required",
+    "password" : "string, min:6, required",
+}
+```
+- Response :
+```json 
+{
+    "status": "success",
+    "message": "Register Berhasil!",
+    "data": {
+        "email": "testing@gmail.com",
+        "name": "testing",
+        "updated_at": "2023-06-12T15:47:40.000000Z",
+        "created_at": "2023-06-12T15:47:40.000000Z",
+        "id": 21
+    }
+}
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Login
+- Endpoint :
+    - /login
+- Method :
+    - POST
+- Body :
+```json 
+{
+ "email": "testing@gmail.com",
+ "password":"testing"
+}
+```
+- Response :
+```json 
+{
+    "message": "Authenticated",
+    "data": {
+        "user": {
+            "id": 21,
+            "name": "testing",
+            "email": "testing@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-06-12T15:47:40.000000Z",
+            "updated_at": "2023-06-12T15:47:40.000000Z"
+        },
+        "data_user": null,
+        "token_type": "Bearer",
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4OSIsImp0aSI6IjU4NTAzZDk0YWU1ZmIyNGMzMjc2YWIzZThiNWVmNTgwZDRkMmVlZGE5MDBjMzdiZmJmYzg1YTFkZmJiYzFkZGQwZTExOTM0OTBhOThmM2RlIiwiaWF0IjoxNjg2NTg4OTQ2Ljk0MTAwNiwibmJmIjoxNjg2NTg4OTQ2Ljk0MTAwOCwiZXhwIjoxNzE4MjExMzQ2LjkyODk4NCwic3ViIjoiMjEiLCJzY29wZXMiOltdfQ.qlD_429qfvhs7ZpucRgVKa3AU1W_A4pvZAmzo3PLCOYb3tLTyNHacd_oxhw5Nmvymteu-bShDFncsRIf0Y93t28KaPbMlu7yaJdmFQA9qsLONlBw7KYMF5ctxUIIwYKU9KEdcf0JH0ZUNwh0Q6GSYJADTmzQT0Ayu3Ga9A8-RZ_IFhzhPF98hpozi9nUvdto-QScUB-WjC-SKiQdoi-P64Kby8gosHfe7wz0LWvlpq7w3MMz-dGvgt8qnNiVrItVXSp5efebLDE_YteiBjQjXBGuB6qsmH96CWCNNNF4Wi6WQ6spEMe6WHm8ytKRUPCLFl8lqDsIkBKT-DV8Ottvtt7ZCQZP-vF39NKHjcaiMEg8sGWHrWz6MARbVNaDMG_b0AyD-Q3dWDroqj9Wh6yuEZhpn7FduDA4CZ2D4sg-KF_3ZyrarJcKO_KFCkjRPgwN-XyHSoGTgn1JS-cYnWHft4xOKxQf3zBRpuLAbH5Vajubbz8RQF0XpIT213A_i8To902nMB3IMgKlgc0EJYz2FsLFPOIlgMJPWKrjKLjIdbDIXRqap_CzpAeApj4WEWLX-XJPMoCBmDk2ArL8tpGYcSVRv-fe4zd5LMQbpjmblpBhZYyXpq2A5heAHCqk_AFGjcQujl50vQhjVZiLWQF68AZX9NYBztOwvS4zXDEBr4w"
+    }
+}
+```
 
-## Contributing
+### Logout
+- Endpoint :
+    - /logout
+- Method :
+    - POST
+- Response :
+```json 
+{
+    "message": "Logout Success",
+    "user": {
+        "id": 21,
+        "name": "testing",
+        "email": "testing@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2023-06-12T15:47:40.000000Z",
+        "updated_at": "2023-06-12T15:47:40.000000Z"
+    }
+}
+```
+### resep
+- Endpoint :
+    - /recipe
+- Method :
+    - GET
+- Params :
+```json 
+{
+    "page" : "2",
+    "size" : "1",
+}
+```
+- Response :
+```json 
+{
+    "message": "Retrieve Recipe Success",
+    "data": [
+        {
+            "id": 4997,
+            "name": "Nancyelle's Thin and Crispy Low Carb Pizza",
+            "number_servings": 8,
+            "calories": 369.39,
+            "carbs": 5.21,
+            "fats": 27.68,
+            "proteins": 23.95,
+            "category": {
+                "category_id": 11,
+                "category_name": "Other",
+                "icon": "https://storage.googleapis.com/image-food/icons/icon-11.png",
+                "colour_array": "251,95,165"
+            },
+            "image": "https://storage.googleapis.com/image-food/images/209787_erin_m_2fdad597-4987-4319-b00d-ff28fb784486.png"
+        }
+    ]
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### s resep
+- Endpoint :
+    - /recipe/search
+- Method :
+    - POST
+- Params :
+```json 
+{
+    "q" : "peanut",
+    "category" : "3",
+}
+```
+- Response :
+```json 
+{
+    "message": "Retrieve Recipes Success",
+    "data": [
+        {
+            "id": 332,
+            "name": "Almond Peanut Butter Chip Muffins",
+            "number_servings": 12,
+            "calories": 137.8,
+            "carbs": 11.26,
+            "fats": 8.77,
+            "proteins": 4.12,
+            "category": {
+                "category_id": 3,
+                "category_name": "Desserts",
+                "icon": "https://storage.googleapis.com/image-food/icons/icon-3.png",
+                "colour_array": "190,227,247"
+            },
+            "image": "https://storage.googleapis.com/image-food/images/281092_Trihardist_3301ce46-a122-4093-9d12-7d5e2759e741.png"
+        },
+    ]
+}
+```
 
-## Code of Conduct
+### s resep id
+- Endpoint :
+    - /recipe/{id}
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve Recipe Success",
+    "data": {
+        "id": 1,
+        "name": "Tofu Parmigiana",
+        "number_servings": 4,
+        "calories": 285.51,
+        "carbs": 17.86,
+        "fats": 16.33,
+        "proteins": 17.49,
+        "category": {
+            "category_id": 11,
+            "category_name": "Other",
+            "icon": "https://storage.googleapis.com/image-food/icons/icon-11.png",
+            "colour_array": "251,95,165"
+        },
+        "image": "https://storage.googleapis.com/image-food/images/35000_jennmrqz_1f34ea4c-0c54-4322-a12f-3a9726a51e45.png",
+        "recipe_steps": [
+            {
+                "id": 1,
+                "recipe_id": 1,
+                "step_no": 1,
+                "text": "In a small bowl, combine bread crumbs, 2 tablespoons Parmesan cheese, 1 teaspoon oregano, salt, and black pepper."
+            },
+            {
+                "id": 2,
+                "recipe_id": 1,
+                "step_no": 2,
+                "text": "Slice tofu into 1/4 inch thick slices, and place in bowl of cold water. One at a time, press tofu slices into crumb mixture, turning to coat all sides."
+            },
+            {
+                "id": 3,
+                "recipe_id": 1,
+                "step_no": 3,
+                "text": "Heat oil in a medium skillet over medium heat. Cook tofu slices until crisp on one side. Drizzle with a bit more olive oil, turn, and brown on the other side."
+            },
+            {
+                "id": 4,
+                "recipe_id": 1,
+                "step_no": 4,
+                "text": "Combine tomato sauce, basil, minced garlic, and remaining oregano. Place a thin layer of sauce in an 8 inch square baking pan. Arrange tofu slices in the pan. Spoon remaining sauce over tofu. Top with shredded mozzarella and remaining 3 tablespoons Parmesan."
+            },
+            {
+                "id": 5,
+                "recipe_id": 1,
+                "step_no": 5,
+                "text": "Bake at 400 degrees F (205 degrees C) for 20 minutes."
+            }
+        ],
+        "recipe_ingredients": [
+            {
+                "id": 1,
+                "recipe_id": 1,
+                "ingredients_detail_id": 4279,
+                "amount": 0.5,
+                "recipe_ingredients_detail": {
+                    "id": 4279,
+                    "name": "Bread crumbs",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 1,
+                            "recipe_ingredient_id": 4279,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 2,
+                            "recipe_ingredient_id": 4279,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 120
+                        },
+                        {
+                            "id": 3,
+                            "recipe_ingredient_id": 4279,
+                            "amount": 1,
+                            "description": "oz",
+                            "grams": 28.35
+                        },
+                        {
+                            "id": 4,
+                            "recipe_ingredient_id": 4279,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 7.5
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 2,
+                "recipe_id": 1,
+                "ingredients_detail_id": 32,
+                "amount": 5,
+                "recipe_ingredients_detail": {
+                    "id": 32,
+                    "name": "Parmesan cheese",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 5,
+                            "recipe_ingredient_id": 32,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 100
+                        },
+                        {
+                            "id": 6,
+                            "recipe_ingredient_id": 32,
+                            "amount": 1,
+                            "description": "oz",
+                            "grams": 28.35
+                        },
+                        {
+                            "id": 7,
+                            "recipe_ingredient_id": 32,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 8,
+                            "recipe_ingredient_id": 32,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 5
+                        },
+                        {
+                            "id": 9,
+                            "recipe_ingredient_id": 32,
+                            "amount": 1,
+                            "description": "tsp",
+                            "grams": 2.08
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 3,
+                "recipe_id": 1,
+                "ingredients_detail_id": 202,
+                "amount": 2,
+                "recipe_ingredients_detail": {
+                    "id": 202,
+                    "name": "Oregano",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 10,
+                            "recipe_ingredient_id": 202,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 11,
+                            "recipe_ingredient_id": 202,
+                            "amount": 1,
+                            "description": "tsp, leaves",
+                            "grams": 1
+                        },
+                        {
+                            "id": 12,
+                            "recipe_ingredient_id": 202,
+                            "amount": 1,
+                            "description": "tsp, ground",
+                            "grams": 1.8
+                        },
+                        {
+                            "id": 13,
+                            "recipe_ingredient_id": 202,
+                            "amount": 1,
+                            "description": "tbsp, leaves",
+                            "grams": 3
+                        },
+                        {
+                            "id": 14,
+                            "recipe_ingredient_id": 202,
+                            "amount": 1,
+                            "description": "tbsp, ground",
+                            "grams": 6
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 4,
+                "recipe_id": 1,
+                "ingredients_detail_id": 221,
+                "amount": 1,
+                "recipe_ingredients_detail": {
+                    "id": 221,
+                    "name": "Salt",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 15,
+                            "recipe_ingredient_id": 221,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 16,
+                            "recipe_ingredient_id": 221,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 292
+                        },
+                        {
+                            "id": 17,
+                            "recipe_ingredient_id": 221,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 18
+                        },
+                        {
+                            "id": 18,
+                            "recipe_ingredient_id": 221,
+                            "amount": 1,
+                            "description": "tsp",
+                            "grams": 6
+                        },
+                        {
+                            "id": 19,
+                            "recipe_ingredient_id": 221,
+                            "amount": 1,
+                            "description": "dash",
+                            "grams": 0.4
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 5,
+                "recipe_id": 1,
+                "ingredients_detail_id": 205,
+                "amount": 1,
+                "recipe_ingredients_detail": {
+                    "id": 205,
+                    "name": "Pepper",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 20,
+                            "recipe_ingredient_id": 205,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 21,
+                            "recipe_ingredient_id": 205,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 6.4
+                        },
+                        {
+                            "id": 22,
+                            "recipe_ingredient_id": 205,
+                            "amount": 1,
+                            "description": "tsp",
+                            "grams": 2.1
+                        },
+                        {
+                            "id": 23,
+                            "recipe_ingredient_id": 205,
+                            "amount": 1,
+                            "description": "dash",
+                            "grams": 0.1
+                        },
+                        {
+                            "id": 24,
+                            "recipe_ingredient_id": 205,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 102.4
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 6,
+                "recipe_id": 1,
+                "ingredients_detail_id": 3646,
+                "amount": 12,
+                "recipe_ingredients_detail": {
+                    "id": 3646,
+                    "name": "Tofu",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 25,
+                            "recipe_ingredient_id": 3646,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 26,
+                            "recipe_ingredient_id": 3646,
+                            "amount": 1,
+                            "description": "slice",
+                            "grams": 84
+                        },
+                        {
+                            "id": 27,
+                            "recipe_ingredient_id": 3646,
+                            "amount": 1,
+                            "description": "oz",
+                            "grams": 28.35
+                        },
+                        {
+                            "id": 28,
+                            "recipe_ingredient_id": 3646,
+                            "amount": 1,
+                            "description": "lb",
+                            "grams": 453.6
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 7,
+                "recipe_id": 1,
+                "ingredients_detail_id": 266,
+                "amount": 2,
+                "recipe_ingredients_detail": {
+                    "id": 266,
+                    "name": "Olive oil",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 29,
+                            "recipe_ingredient_id": 266,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 30,
+                            "recipe_ingredient_id": 266,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 13.5
+                        },
+                        {
+                            "id": 31,
+                            "recipe_ingredient_id": 266,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 216
+                        },
+                        {
+                            "id": 32,
+                            "recipe_ingredient_id": 266,
+                            "amount": 1,
+                            "description": "tsp",
+                            "grams": 4.5
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 8,
+                "recipe_id": 1,
+                "ingredients_detail_id": 178,
+                "amount": 0.5,
+                "recipe_ingredients_detail": {
+                    "id": 178,
+                    "name": "Basil",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 33,
+                            "recipe_ingredient_id": 178,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 34,
+                            "recipe_ingredient_id": 178,
+                            "amount": 1,
+                            "description": "tsp, leaves",
+                            "grams": 0.7
+                        },
+                        {
+                            "id": 35,
+                            "recipe_ingredient_id": 178,
+                            "amount": 1,
+                            "description": "tbsp, leaves",
+                            "grams": 2.1
+                        },
+                        {
+                            "id": 36,
+                            "recipe_ingredient_id": 178,
+                            "amount": 1,
+                            "description": "tsp, ground",
+                            "grams": 1.4
+                        },
+                        {
+                            "id": 37,
+                            "recipe_ingredient_id": 178,
+                            "amount": 1,
+                            "description": "tbsp, ground",
+                            "grams": 4.5
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 9,
+                "recipe_id": 1,
+                "ingredients_detail_id": 1980,
+                "amount": 1,
+                "recipe_ingredients_detail": {
+                    "id": 1980,
+                    "name": "Garlic",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 38,
+                            "recipe_ingredient_id": 1980,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 39,
+                            "recipe_ingredient_id": 1980,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 136
+                        },
+                        {
+                            "id": 40,
+                            "recipe_ingredient_id": 1980,
+                            "amount": 1,
+                            "description": "tsp",
+                            "grams": 2.8
+                        },
+                        {
+                            "id": 41,
+                            "recipe_ingredient_id": 1980,
+                            "amount": 1,
+                            "description": "clove",
+                            "grams": 3
+                        },
+                        {
+                            "id": 42,
+                            "recipe_ingredient_id": 1980,
+                            "amount": 1,
+                            "description": "cloves, minced",
+                            "grams": 3
+                        },
+                        {
+                            "id": 43,
+                            "recipe_ingredient_id": 1980,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 8.5
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 10,
+                "recipe_id": 1,
+                "ingredients_detail_id": 2235,
+                "amount": 1,
+                "recipe_ingredients_detail": {
+                    "id": 2235,
+                    "name": "Tomato sauce",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 44,
+                            "recipe_ingredient_id": 2235,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 45,
+                            "recipe_ingredient_id": 2235,
+                            "amount": 1,
+                            "description": "cup",
+                            "grams": 245
+                        },
+                        {
+                            "id": 46,
+                            "recipe_ingredient_id": 2235,
+                            "amount": 1,
+                            "description": "tbsp",
+                            "grams": 15.31
+                        },
+                        {
+                            "id": 47,
+                            "recipe_ingredient_id": 2235,
+                            "amount": 1,
+                            "description": "tsp",
+                            "grams": 5.1
+                        }
+                    ]
+                }
+            },
+            {
+                "id": 11,
+                "recipe_id": 1,
+                "ingredients_detail_id": 28,
+                "amount": 4,
+                "recipe_ingredients_detail": {
+                    "id": 28,
+                    "name": "Mozzarella cheese",
+                    "recipe_ingredients_weights": [
+                        {
+                            "id": 48,
+                            "recipe_ingredient_id": 28,
+                            "amount": 100,
+                            "description": "grams",
+                            "grams": 100
+                        },
+                        {
+                            "id": 49,
+                            "recipe_ingredient_id": 28,
+                            "amount": 1,
+                            "description": "oz",
+                            "grams": 28.35
+                        },
+                        {
+                            "id": 50,
+                            "recipe_ingredient_id": 28,
+                            "amount": 1,
+                            "description": "cup, diced",
+                            "grams": 132
+                        },
+                        {
+                            "id": 51,
+                            "recipe_ingredient_id": 28,
+                            "amount": 1,
+                            "description": "cup, shredded",
+                            "grams": 112
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### g recip by cat
+- Endpoint :
+    - /recipe/getByCategory/{category}
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve Recipe Success",
+    "data": [
+        {
+            "id": 69,
+            "name": "Blueberry, Banana, and Strawberry Smoothie",
+            "number_servings": 1,
+            "calories": 372.76,
+            "carbs": 77.31,
+            "fats": 5.26,
+            "proteins": 11.05,
+            "category": {
+                "category_id": 6,
+                "category_name": "Protein shakes",
+                "icon": "https://storage.googleapis.com/image-food/icons/icon-6.png",
+                "colour_array": "25,119,244"
+            },
+            "image": "https://storage.googleapis.com/image-food/images/933725_monika.kaliton_e8754cd0-4bcc-4ad2-a0a5-cbc6d8173b4c.jpg"
+        }
+    ]
+}
+```
 
-## Security Vulnerabilities
+### g cat
+- Endpoint :
+    - /category
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "data": [
+        {
+            "category_id": 1,
+            "category_name": "Appetizers",
+            "icon": "https://storage.googleapis.com/image-food/icons/icon-1.png",
+            "colour_array": "251,171,44"
+        },
+        {
+            "category_id": 2,
+            "category_name": "Breakfast",
+            "icon": "https://storage.googleapis.com/image-food/icons/icon-2.png",
+            "colour_array": "148,187,41"
+        }
+    ]
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### g cat
+- Endpoint :
+    - /user
+- Method :
+    - PUT
+- Request :
 
-## License
+```json 
+{
+    "name": "testing",
+    "email": "testing@gmail.com"
+}
+```
+- Response :
+```json 
+{
+    "message": "Update User Success",
+    "data": {
+        "id": 21,
+        "name": "testing2",
+        "email": "testing2@gmail.com",
+        "email_verified_at": null,
+        "created_at": "2023-06-12T15:47:40.000000Z",
+        "updated_at": "2023-06-12T17:15:44.000000Z"
+    }
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### store dataUser
+- Endpoint :
+    - /dataUser
+- Method :
+    - POST
+- Request :
+
+```json 
+{
+        "age": "23",
+        "weight": "100",
+        "height": "150",
+        "gender": "1",
+        "activity_level": 1.9,
+        "gender": "1",
+        "diet_objective": "1",
+        "current_weight": "20",
+}
+```
+- Response :
+```json 
+{
+    "message": "Add dataUser Success",
+    "data": {
+        "age": "23",
+        "weight": "100",
+        "height": "150",
+        "gender": "1",
+        "bmi": 44.44444444444444,
+        "user_id": 21,
+        "diet_objective": "1",
+        "current_weight": "20",
+        "activity_level": 1.9,
+        "bmr": 2036.555,
+        "updated_at": "2023-06-12T17:21:33.000000Z",
+        "created_at": "2023-06-12T17:21:33.000000Z",
+        "dataUser_id": 15
+    }
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /dataUser
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve all User Success",
+    "data": {
+        "dataUser_id": 15,
+        "age": 23,
+        "weight": 100,
+        "height": 150,
+        "bmr": 2036.56,
+        "bmi": 44.4444,
+        "activity_level": 1.9,
+        "gender": 1,
+        "idealCalories": null,
+        "user_id": 21,
+        "current_weight": 20,
+        "diet_objective": 1,
+        "created_at": "2023-06-12T17:21:33.000000Z",
+        "updated_at": "2023-06-12T17:21:33.000000Z",
+        "user": {
+            "id": 21,
+            "name": "testing2",
+            "email": "testing2@gmail.com",
+            "email_verified_at": null,
+            "created_at": "2023-06-12T15:47:40.000000Z",
+            "updated_at": "2023-06-12T17:15:44.000000Z"
+        }
+    }
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /foodHistory
+- Method :
+    - POST
+- Request :
+
+```json 
+{
+    "recipe_id": "621",
+    "calories": "5422",
+    "carbs": "34",
+    "fats": "12",
+    "proteins": "33",
+    "food_time": "4",
+    "date": "2023-06-06",
+}
+```
+- Response :
+```json 
+{
+    "message": "Add Food History Success",
+    "data": {
+        "recipe_id": "621",
+        "calories": "5422",
+        "carbs": "34",
+        "fats": "12",
+        "proteins": "33",
+        "food_time": "4",
+        "date": "2023-06-06",
+        "user_id": 21,
+        "updated_at": "2023-06-12T17:27:06.000000Z",
+        "created_at": "2023-06-12T17:27:06.000000Z",
+        "id": 43
+    }
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /foodHistory/{date}
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve specific food history success",
+    "data": [
+        {
+            "id": 53,
+            "user_id": 21,
+            "recipe_id": 621,
+            "calories": 542,
+            "carbs": 34,
+            "fats": 12,
+            "proteins": 33,
+            "food_time": 1,
+            "date": "2023-06-06",
+            "created_at": "2023-06-13T15:50:22.000000Z",
+            "updated_at": "2023-06-13T15:50:22.000000Z",
+            "recipe": {
+                "id": 621,
+                "name": "Low Carb Pepperoni Pizza",
+                "number_servings": 6,
+                "calories": 334.49,
+                "carbs": 6.69,
+                "fats": 25.78,
+                "proteins": 19.07,
+                "category": 11,
+                "image": "https://storage.googleapis.com/image-food/images/983899_elm333_96525aba-975d-425d-8cfe-ea632548a1e4.jpg"
+            }
+        }
+    ]
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /foodHistoryGroup/{date}
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve calories grouped by date and food time success",
+    "data": [
+        {
+            "food_time": 4,
+            "total_calories": "10844"
+        },
+        {
+            "food_time": 3,
+            "total_calories": "5422"
+        },
+        {
+            "food_time": 2,
+            "total_calories": "54"
+        },
+        {
+            "food_time": 1,
+            "total_calories": "542"
+        }
+    ]
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /foodHistoryGroup/{id}
+- Method :
+    - DELETE
+- Response :
+```json 
+{
+    "message": "Delete Food History Success",
+    "data": {
+        "id": 2,
+        "user_id": 1,
+        "recipe_id": "R1",
+        "calories": 54,
+        "carbs": 34,
+        "fats": 12,
+        "proteins": 33,
+        "food_time": 4,
+        "date": "2023-06-06",
+        "created_at": "2023-06-07T20:58:43.000000Z",
+        "updated_at": "2023-06-07T20:58:43.000000Z"
+    }
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /deleteAllFoodHistory
+- Method :
+    - DELETE
+- Response :
+```json 
+{
+    "message": "Delete all Food History Success",
+    "data": 5
+}
+```
+### store dataUser
+- Endpoint :
+    - /searchHistory
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve Search History Success",
+    "data": [
+        {
+            "id": 32,
+            "recipe_id": 5,
+            "user_id": 21,
+            "searched_at": "2023-06-12 17:35:31",
+            "created_at": "2023-06-12T17:35:31.000000Z",
+            "updated_at": "2023-06-12T17:35:31.000000Z",
+            "recipe": {
+                "id": 5,
+                "name": "Fennel Pork Chops",
+                "number_servings": 4,
+                "calories": 206.72,
+                "carbs": 6.51,
+                "fats": 4.46,
+                "proteins": 24.46,
+                "category": {
+                    "category_id": 5,
+                    "category_name": "Meats",
+                    "icon": "https://storage.googleapis.com/image-food/icons/icon-5.png",
+                    "colour_array": "251,230,70"
+                },
+                "image": "https://storage.googleapis.com/image-food/images/36694_Kaleido91_73929b7b-af8f-4ad4-b084-ca7e4315bc15.png"
+            }
+        }
+    ]
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /searchHistory
+- Method :
+    - POST
+- Request :
+```json 
+{
+    "recipe_id": "5",
+}
+```
+- Response :
+```json 
+{
+    "message": "Add Search History Success",
+    "data": {
+        "recipe_id": "5",
+        "user_id": 21,
+        "searched_at": "2023-06-12 17:35:31",
+        "updated_at": "2023-06-12T17:35:31.000000Z",
+        "created_at": "2023-06-12T17:35:31.000000Z",
+        "id": 32
+    }
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /deleteAllSearchHistory
+- Method :
+    - DELETE
+- Response :
+```json 
+{
+    "message": "Delete all Search History Success",
+    "data": 0
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /favorite
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve Favorite Success",
+    "data": [
+        {
+            "id": 24,
+            "recipe_id": 23,
+            "user_id": 21,
+            "created_at": "2023-06-12T16:26:22.000000Z",
+            "updated_at": "2023-06-12T16:26:22.000000Z",
+            "recipe": {
+                "id": 23,
+                "name": "Cream Cheese Jalapeno Hamburgers",
+                "number_servings": 8,
+                "calories": 616.19,
+                "carbs": 25.5,
+                "fats": 45.79,
+                "proteins": 25.31,
+                "category": {
+                    "category_id": 8,
+                    "category_name": "Sandwiches",
+                    "icon": "https://storage.googleapis.com/image-food/icons/icon-8.png",
+                    "colour_array": "196,102,232"
+                },
+                "image": "https://storage.googleapis.com/image-food/images/36606_simmyras_ca95dbbd-01bd-43a7-b684-d9056d13fa63.png"
+            }
+        }
+    ]
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /checkFavorite/{id}
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Retrieve Favorite Success",
+    "data": [
+        {
+            "id": 24,
+            "recipe_id": 23,
+            "user_id": 21,
+            "created_at": "2023-06-12T16:26:22.000000Z",
+            "updated_at": "2023-06-12T16:26:22.000000Z",
+            "recipe": {
+                "id": 23,
+                "name": "Cream Cheese Jalapeno Hamburgers",
+                "number_servings": 8,
+                "calories": 616.19,
+                "carbs": 25.5,
+                "fats": 45.79,
+                "proteins": 25.31,
+                "category": {
+                    "category_id": 8,
+                    "category_name": "Sandwiches",
+                    "icon": "https://storage.googleapis.com/image-food/icons/icon-8.png",
+                    "colour_array": "196,102,232"
+                },
+                "image": "https://storage.googleapis.com/image-food/images/36606_simmyras_ca95dbbd-01bd-43a7-b684-d9056d13fa63.png"
+            }
+        }
+    ]
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /favorite/{id}
+- Method :
+    - DELETE
+- Response :
+```json 
+{
+    "message": "Delete Favorite Success",
+    "data": {
+        "id": 31,
+        "recipe_id": 2,
+        "user_id": 21,
+        "created_at": "2023-06-12T17:47:51.000000Z",
+        "updated_at": "2023-06-12T17:47:51.000000Z"
+    }
+}
+```
+
+### store dataUser
+- Endpoint :
+    - /deleteAllFavorite
+- Method :
+    - DELETE
+- Response :
+```json 
+{
+    "message": "Delete all Favorite Success",
+    "data": 6
+}
+```
+
