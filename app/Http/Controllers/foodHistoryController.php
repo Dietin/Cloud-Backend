@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\foodHistory;
 use App\Models\recipe;
+use App\Models\User;
+use App\Models\category;
+
 
 
 class foodHistoryController extends Controller
@@ -74,7 +77,7 @@ class foodHistoryController extends Controller
     //mengambil date yang spesifik dan berdasarkan user_id yang sedang login
     public function getByDate(Request $request, $date){
         $user_id = $request->user()->id;
-        $foodHistory = foodHistory::with('recipe')->where('user_id', $user_id)->where('date', $date)->get();
+        $foodHistory = foodHistory::with('recipe.category')->where('user_id', $user_id)->where('date', $date)->get();
     
         if ($foodHistory->isEmpty()) {
             return response([
