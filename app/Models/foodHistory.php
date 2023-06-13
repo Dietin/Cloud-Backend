@@ -21,4 +21,8 @@ class foodHistory extends Model
         'food_time',
         'date',
     ];
+    public function recipe()
+    {
+        return $this->belongsTo(Recipe::class);
+    }
 }

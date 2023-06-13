@@ -41,4 +41,8 @@ class recipe extends Model
     public function favorite(){
         return $this->hasMany(favorite::class, 'recipe_id');
     }
+
+    public function foodHistory(){
+        return $this->hasMany(foodHistory::class, 'recipe_id');
+    }
 }

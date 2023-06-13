@@ -72,7 +72,7 @@ class foodHistoryController extends Controller
     //mengambil date yang spesifik dan berdasarkan user_id yang sedang login
     public function getByDate(Request $request, $date){
         $user_id = $request->user()->id;
-        $foodHistory = foodHistory::where('user_id', $user_id)->where('date', $date)->get();
+        $foodHistory = foodHistory::with('recipe')->where('user_id', $user_id)->where('date', $date)->get();
     
         if ($foodHistory->isEmpty()) {
             return response([
