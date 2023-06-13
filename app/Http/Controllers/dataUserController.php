@@ -25,7 +25,6 @@ class dataUserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'age' => 'required',
-            'weight' => 'required',
             'height' => 'required',
             'activity_level' => 'required|integer|between:1,5',
             'gender' => 'required',
@@ -54,6 +53,10 @@ class dataUserController extends Controller
         $dataUser->user_id = $user;
         $dataUser->diet_objective = $request->input('diet_objective');
         $dataUser->current_weight = $request->input('current_weight');
+
+        if($dataUser->diet_objective == 2){
+            $dataUser->weight = $dataUser->current_weight;
+        }
 
         $activityLevel = $request->input('activity_level');
         if ($activityLevel == 1) {
