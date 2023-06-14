@@ -7,7 +7,6 @@ to run the API model use the command line below
 * composer require laravel/passport
 * php artisan passport:install
 * php artisan serve
-* Seaborn
 
 
 # API Reference
