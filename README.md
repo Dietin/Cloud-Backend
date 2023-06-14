@@ -2,6 +2,12 @@
 # API Model-Diet!n-API Spec
 
 The documentation 
+to run the API model use the command line below
+[
+composer require laravel/passport
+php artisan passport:install
+php artisan serve
+]
 
 # API Reference
 
