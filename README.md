@@ -1,12 +1,41 @@
 
-# API Model-Diet!n-API Spec
+# API Model-Diet!n-Api Docs
 
-The documentation 
-
-to run the API model use the command line below
-* composer require laravel/passport
-* php artisan passport:install
-* php artisan serve
+## API-Documentation
+- [Authentication and Authorization](#Authentication-and-Authorization)
+    - [Register](#register)
+    - [Login](#login)
+    - [Logout](#logout)
+- [Recipe](#recipe)
+    - [Read Recipe](#read-recipe)
+    - [Search Recipe](#search-recipe)
+    - [Read Recipe by Id](#Read-recipebyid)
+    - [Read Recipe by Category](#read-recipe-by-category)
+- [Category](#category)
+    - [Read Category](#read-category)
+- [User](#user)
+    - [Update User](#update-user)
+    - [Create dataUser](#create-datauser)
+    - [Read dataUser](#read-datauser)
+- [Food History](#foodhistory)
+    - [Create foodHistory](#create-foodhistory)
+    - [Read foodHistory by date](#readfood-historybydate)
+    - [Read foodHistory Grouped by Date and Time](#read-foodhistorybygrouped)
+    - [Delete foodHistory by id](#delete-foodhistorybyid)
+    - [Delete all foodHistory](#delete-all-foodhistory)
+- [Search History](#search-history)
+    - [Read searchHistory](#search-history)
+    - [Create searchHistory](#create-search-history)
+    - [Delete all searchHistory](#delete-all-search-history)
+- [Favorite](#favorite)
+    - [Read Favorite](#read-favorite)
+    - [Read Favorite recipe](#read-favorite-recipe)
+    - [Create Favorite](#create-favorite)
+    - [Delete Favorite by Id](#delete-favoritebyid)
+    - [Delete all Favorite](#delete-allfavorite)   
+- [Weight Calories History](#calorie-history)
+    - [Post Weight Calories History](#post-calorie-history)
+    - [Read Weight Calories History](#read-calorie-history)
 
 
 # API Reference
@@ -91,175 +120,10 @@ to run the API model use the command line below
     }
 }
 ```
-### resep
-- Endpoint :
-    - /recipe
-- Method :
-    - GET
-- Response :
-```json 
-{
-    "message": "Retrieve Recipe Success",
-    "data": [
-        {
-            "id": 4997,
-            "name": "Nancyelle's Thin and Crispy Low Carb Pizza",
-            "number_servings": 8,
-            "calories": 369.39,
-            "carbs": 5.21,
-            "fats": 27.68,
-            "proteins": 23.95,
-            "category": {
-                "category_id": 11,
-                "category_name": "Other",
-                "icon": "https://storage.googleapis.com/image-food/icons/icon-11.png",
-                "colour_array": "251,95,165"
-            },
-            "image": "https://storage.googleapis.com/image-food/images/209787_erin_m_2fdad597-4987-4319-b00d-ff28fb784486.png"
-        }
-    ]
-}
-```
 
-### s resep
-- Endpoint :
-    - /recipe/search
-- Method :
-    - POST
-- Params :
-```json 
-{
-    "q" : "peanut",
-    "category" : "3",
-}
-```
-- Response :
-```json 
-{
-    "message": "Retrieve Recipes Success",
-    "data": [
-        {
-            "id": 332,
-            "name": "Almond Peanut Butter Chip Muffins",
-            "number_servings": 12,
-            "calories": 137.8,
-            "carbs": 11.26,
-            "fats": 8.77,
-            "proteins": 4.12,
-            "category": {
-                "category_id": 3,
-                "category_name": "Desserts",
-                "icon": "https://storage.googleapis.com/image-food/icons/icon-3.png",
-                "colour_array": "190,227,247"
-            },
-            "image": "https://storage.googleapis.com/image-food/images/281092_Trihardist_3301ce46-a122-4093-9d12-7d5e2759e741.png"
-        },
-    ]
-}
-```
+## Recipe
 
-### Logout
-- Endpoint :
-    - /logout
-- Method :
-    - POST
-- Response :
-```json 
-{
-    "message": "Logout Success",
-    "user": {
-        "id": 21,
-        "name": "testing",
-        "email": "testing@gmail.com",
-        "email_verified_at": null,
-        "created_at": "2023-06-12T15:47:40.000000Z",
-        "updated_at": "2023-06-12T15:47:40.000000Z"
-    }
-}
-```# API Reference
-
-## Authentication and Authorization
-
-### Register
-- Endpoint :
-    - /register
-- Method :
-    - POST
-- Body :
-```json 
-{
-    "name" : "string, no whistespace, alphanumeric, required",
-    "email" : "string, email, required",
-    "password" : "string, min:6, required",
-}
-```
-- Response :
-```json 
-{
-    "status": "success",
-    "message": "Register Berhasil!",
-    "data": {
-        "email": "testing@gmail.com",
-        "name": "testing",
-        "updated_at": "2023-06-12T15:47:40.000000Z",
-        "created_at": "2023-06-12T15:47:40.000000Z",
-        "id": 21
-    }
-}
-```
-
-### Login
-- Endpoint :
-    - /login
-- Method :
-    - POST
-- Body :
-```json 
-{
- "email": "testing@gmail.com",
- "password":"testing"
-}
-```
-- Response :
-```json 
-{
-    "message": "Authenticated",
-    "data": {
-        "user": {
-            "id": 21,
-            "name": "testing",
-            "email": "testing@gmail.com",
-            "email_verified_at": null,
-            "created_at": "2023-06-12T15:47:40.000000Z",
-            "updated_at": "2023-06-12T15:47:40.000000Z"
-        },
-        "data_user": null,
-        "token_type": "Bearer",
-        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI4OSIsImp0aSI6IjU4NTAzZDk0YWU1ZmIyNGMzMjc2YWIzZThiNWVmNTgwZDRkMmVlZGE5MDBjMzdiZmJmYzg1YTFkZmJiYzFkZGQwZTExOTM0OTBhOThmM2RlIiwiaWF0IjoxNjg2NTg4OTQ2Ljk0MTAwNiwibmJmIjoxNjg2NTg4OTQ2Ljk0MTAwOCwiZXhwIjoxNzE4MjExMzQ2LjkyODk4NCwic3ViIjoiMjEiLCJzY29wZXMiOltdfQ.qlD_429qfvhs7ZpucRgVKa3AU1W_A4pvZAmzo3PLCOYb3tLTyNHacd_oxhw5Nmvymteu-bShDFncsRIf0Y93t28KaPbMlu7yaJdmFQA9qsLONlBw7KYMF5ctxUIIwYKU9KEdcf0JH0ZUNwh0Q6GSYJADTmzQT0Ayu3Ga9A8-RZ_IFhzhPF98hpozi9nUvdto-QScUB-WjC-SKiQdoi-P64Kby8gosHfe7wz0LWvlpq7w3MMz-dGvgt8qnNiVrItVXSp5efebLDE_YteiBjQjXBGuB6qsmH96CWCNNNF4Wi6WQ6spEMe6WHm8ytKRUPCLFl8lqDsIkBKT-DV8Ottvtt7ZCQZP-vF39NKHjcaiMEg8sGWHrWz6MARbVNaDMG_b0AyD-Q3dWDroqj9Wh6yuEZhpn7FduDA4CZ2D4sg-KF_3ZyrarJcKO_KFCkjRPgwN-XyHSoGTgn1JS-cYnWHft4xOKxQf3zBRpuLAbH5Vajubbz8RQF0XpIT213A_i8To902nMB3IMgKlgc0EJYz2FsLFPOIlgMJPWKrjKLjIdbDIXRqap_CzpAeApj4WEWLX-XJPMoCBmDk2ArL8tpGYcSVRv-fe4zd5LMQbpjmblpBhZYyXpq2A5heAHCqk_AFGjcQujl50vQhjVZiLWQF68AZX9NYBztOwvS4zXDEBr4w"
-    }
-}
-```
-
-### Logout
-- Endpoint :
-    - /logout
-- Method :
-    - POST
-- Response :
-```json 
-{
-    "message": "Logout Success",
-    "user": {
-        "id": 21,
-        "name": "testing",
-        "email": "testing@gmail.com",
-        "email_verified_at": null,
-        "created_at": "2023-06-12T15:47:40.000000Z",
-        "updated_at": "2023-06-12T15:47:40.000000Z"
-    }
-}
-```
-### resep
+### Read Recipe
 - Endpoint :
     - /recipe
 - Method :
@@ -296,7 +160,7 @@ to run the API model use the command line below
 }
 ```
 
-### s resep
+### Search Recipe
 - Endpoint :
     - /recipe/search
 - Method :
@@ -333,7 +197,7 @@ to run the API model use the command line below
 }
 ```
 
-### s resep id
+### Read Recipe by Id
 - Endpoint :
     - /recipe/{id}
 - Method :
@@ -884,9 +748,9 @@ to run the API model use the command line below
 }
 ```
 
-### g recip by cat
+### Read Recipe by Category
 - Endpoint :
-    - /recipe/getByCategory/{category}
+    - /category/getByCategory
 - Method :
     - GET
 - Response :
@@ -914,7 +778,9 @@ to run the API model use the command line below
 }
 ```
 
-### g cat
+## Category
+
+### Read Category
 - Endpoint :
     - /category
 - Method :
@@ -939,7 +805,9 @@ to run the API model use the command line below
 }
 ```
 
-### g cat
+## user
+
+### Update User
 - Endpoint :
     - /user
 - Method :
@@ -967,7 +835,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Create dataUser
 - Endpoint :
     - /dataUser
 - Method :
@@ -1008,7 +876,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Read dataUser
 - Endpoint :
     - /dataUser
 - Method :
@@ -1044,7 +912,9 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+## Food History
+
+## Create foodHistory
 - Endpoint :
     - /foodHistory
 - Method :
@@ -1082,7 +952,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Read foodHistory by date
 - Endpoint :
     - /foodHistory/{date}
 - Method :
@@ -1093,34 +963,23 @@ to run the API model use the command line below
     "message": "Retrieve specific food history success",
     "data": [
         {
-            "id": 53,
+            "id": 43,
             "user_id": 21,
-            "recipe_id": 621,
-            "calories": 542,
+            "recipe_id": "621",
+            "calories": 5422,
             "carbs": 34,
             "fats": 12,
             "proteins": 33,
-            "food_time": 1,
+            "food_time": 4,
             "date": "2023-06-06",
-            "created_at": "2023-06-13T15:50:22.000000Z",
-            "updated_at": "2023-06-13T15:50:22.000000Z",
-            "recipe": {
-                "id": 621,
-                "name": "Low Carb Pepperoni Pizza",
-                "number_servings": 6,
-                "calories": 334.49,
-                "carbs": 6.69,
-                "fats": 25.78,
-                "proteins": 19.07,
-                "category": 11,
-                "image": "https://storage.googleapis.com/image-food/images/983899_elm333_96525aba-975d-425d-8cfe-ea632548a1e4.jpg"
-            }
+            "created_at": "2023-06-12T17:27:06.000000Z",
+            "updated_at": "2023-06-12T17:27:06.000000Z"
         }
     ]
 }
 ```
 
-### store dataUser
+### Read foodHistory Grouped by Date and Time
 - Endpoint :
     - /foodHistoryGroup/{date}
 - Method :
@@ -1150,9 +1009,9 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Delete foodHistory by Id
 - Endpoint :
-    - /foodHistoryGroup/{id}
+    - /foodHistory/{id}
 - Method :
     - DELETE
 - Response :
@@ -1175,7 +1034,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Delete all foodHistory
 - Endpoint :
     - /deleteAllFoodHistory
 - Method :
@@ -1187,7 +1046,10 @@ to run the API model use the command line below
     "data": 5
 }
 ```
-### store dataUser
+
+## Search History
+
+### Read searchHistory
 - Endpoint :
     - /searchHistory
 - Method :
@@ -1225,7 +1087,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Create searchHistory
 - Endpoint :
     - /searchHistory
 - Method :
@@ -1251,7 +1113,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Delete all searchHistory
 - Endpoint :
     - /deleteAllSearchHistory
 - Method :
@@ -1264,7 +1126,9 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+## Favorite
+
+### Read Favorite
 - Endpoint :
     - /favorite
 - Method :
@@ -1301,7 +1165,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Read Favorite recipe
 - Endpoint :
     - /checkFavorite/{id}
 - Method :
@@ -1338,7 +1202,32 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Create Favorite
+- Endpoint :
+    - /favorite
+- Method :
+    - POST
+- Request :
+```json 
+{
+    "recipe_id": "5",
+}
+```
+- Response :
+```json 
+{
+    "message": "Retrieve Favorite Success",
+    "data": {
+        "recipe_id": "5",
+        "user_id": 21,
+        "updated_at": "2023-06-12T18:21:23.000000Z",
+        "created_at": "2023-06-12T18:21:23.000000Z",
+        "id": 36
+    }
+}
+```
+
+### Delete Favorite by Id
 - Endpoint :
     - /favorite/{id}
 - Method :
@@ -1357,7 +1246,7 @@ to run the API model use the command line below
 }
 ```
 
-### store dataUser
+### Delete all Favorite
 - Endpoint :
     - /deleteAllFavorite
 - Method :
@@ -1370,3 +1259,47 @@ to run the API model use the command line below
 }
 ```
 
+
+## Calorie History
+
+### Post Calorie History
+- Endpoint :
+    - /weightHistory
+- Method :
+    - POST
+- Response :
+```json 
+{
+    "message": "Input Weight History Success",
+    "data": {
+        "user_id": 8,
+        "dataUser_id": 4,
+        "date": "2023-06-15 02:11:30",
+        "idealCalories": 4610.15,
+        "updated_at": "2023-06-15T02:11:30.000000Z",
+        "created_at": "2023-06-15T02:11:30.000000Z",
+        "id": 4
+    }
+}
+```
+
+### Read Calorie History
+- Endpoint :
+    - /weightHistory/{date}
+- Method :
+    - GET
+- Response :
+```json 
+{
+    "message": "Get weight history success",
+    "data": {
+        "id": 4,
+        "user_id": 8,
+        "dataUser_id": 4,
+        "idealCalories": 4610.15,
+        "date": "2023-06-15 02:11:30",
+        "created_at": "2023-06-15 02:11:30",
+        "updated_at": "2023-06-15 02:11:30"
+    }
+}
+```
