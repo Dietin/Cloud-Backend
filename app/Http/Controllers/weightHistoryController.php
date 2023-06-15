@@ -45,6 +45,7 @@ class weightHistoryController extends Controller
         $weightHistory = DB::table('weightHistory')
                                 ->select('*')
                                 ->where('date','<', date("Y-m-d", strtotime($date . " +1 day")) )
+                                ->where('user_id', $user_id)
                                 ->orderBy('date', 'desc')
                                 ->first();
         return response([
