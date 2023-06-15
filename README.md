@@ -1,6 +1,11 @@
 
 # API Model-Diet!n-Api Docs
 
+
+## BASE-URL
+https://cloud-computing-w72cmhmh6q-et.a.run.app/api
+
+
 ## API-Documentation
 - [Authentication and Authorization](#Authentication-and-Authorization)
     - [Register](#register)
