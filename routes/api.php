@@ -57,5 +57,9 @@ Route::group(['middleware' => 'auth:api','verified'], function(){
     Route::delete('favorite/{id}', 'App\Http\Controllers\favoriteController@destroy');
     Route::delete('deleteAllFavorite', 'App\Http\Controllers\favoriteController@destroyAll');
 
+    //weightHistory
+    Route::post('weightHistory', 'App\Http\Controllers\weightHistoryController@storeWeightHistory');
+    Route::get('weightHistory/{date}', 'App\Http\Controllers\weightHistoryController@getByDate');
+
     Route::post('logout', 'App\Http\Controllers\API\AuthController@logout');
 });

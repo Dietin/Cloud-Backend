@@ -58,4 +58,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(favorite::class, 'user_id');
     }
+
+    public function weightHistory(){
+        return $this->hasMany(WeightHistory::class, 'user_id');
+    }
 }

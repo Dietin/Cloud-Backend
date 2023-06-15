@@ -28,4 +28,8 @@ class dataUser extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function weightHistory(){
+        return $this->hasMany(WeightHistory::class, 'dataUser_id');
+    }
 }
